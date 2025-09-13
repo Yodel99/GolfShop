@@ -1,23 +1,38 @@
 ﻿@inherits LayoutComponentBase
 
-<div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
 
-    <main>
-        <div class="top-row px-4">
-            <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
-        </div>
+<MudThemeProvider/>
+<MudDialogProvider />
+<MudSnackbarProvider/>
+<MudPopoverProvider />
 
-        <article class="content px-4">
-            @Body
-        </article>
-    </main>
-</div>
+<MudLayout>
+    <!-- AppBar / Top bar -->
+    <MudAppBar Color="Color.Primary" Fixed="false">
+        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" DropShadow="false" OnClick="ToggleDrawer"/>
+        <MudSpacer />
+        <MudIconButton Icon="@Icons.Material.Filled.ShoppingCart" Color="Color.Inherit" />
+        <MudIconButton Icon="@Icons.Material.Filled.Person" Color="Color.Inherit" />
+    </MudAppBar>
 
-<div id="blazor-error-ui" data-nosnippet>
-    An unhandled error has occurred.
-    <a href="." class="reload">Reload</a>
-    <span class="dismiss">🗙</span>
-</div>
+     <!-- Drawer / Left side menu-->
+    <MudDrawer Variant="DrawerVariant.Temporary" @bind-Open="@_drawerOpen">
+        <MudDrawerHeader>Menu</MudDrawerHeader>
+        <MudButton Variant="Variant.Text" Color="Color.Primary">Home</MudButton>
+        <MudButton Variant="Variant.Text" Color="Color.Primary">Golf products</MudButton> 
+    </MudDrawer>
+
+    <!-- Body -->
+    <MudMainContent>
+        @Body
+    </MudMainContent>
+</MudLayout>
+
+@code{
+    bool _drawerOpen = false;
+
+    void ToggleDrawer()
+    {
+        _drawerOpen = !_drawerOpen;
+    }
+}
