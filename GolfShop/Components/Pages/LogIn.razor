@@ -1,0 +1,25 @@
+﻿@inherits LayoutComponentBase
+@page "/login"
+@using Service
+
+<MudLayout>
+        <h1>Log In</h1>        
+        <MudTextField Label="Username" Variant="Variant.Outlined" @bind-Value="_username" Style="width:250px; height:auto;"/>
+        <MudTextField Label="Password" Variant="Variant.Outlined" @bind-Value="_password" InputType="InputType.Password" Style="width:250px; height:auto;"/>
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" Style="width:250px; height:auto;" OnClick="UserLogIn">Log In</MudButton>
+</MudLayout>
+
+
+
+@code {
+    LogInController logIn = new LogInController();
+    private string _username;
+    private string _password;
+
+    
+
+    void UserLogIn()
+    {
+        logIn.UserLogIn(_username, _password);
+    }
+}

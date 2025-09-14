@@ -11,14 +11,22 @@
     <MudAppBar Color="Color.Primary" Fixed="false">
         <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" DropShadow="false" OnClick="ToggleDrawer"/>
         <MudSpacer />
-        <MudIconButton Icon="@Icons.Material.Filled.ShoppingCart" Color="Color.Inherit" />
-        <MudIconButton Icon="@Icons.Material.Filled.Person" Color="Color.Inherit" />
+        <MudIconButton Icon="@Icons.Material.Filled.ShoppingCart" Color="Color.Inherit" />     
+        <MudMenu>
+            <ActivatorContent>
+                <MudIconButton Icon="@Icons.Material.Filled.Person" Color="Color.Inherit" />
+            </ActivatorContent>
+            <ChildContent>
+                <MudMenuItem Href="/login">Login</MudMenuItem>
+                <MudMenuItem>Logout</MudMenuItem>
+            </ChildContent>
+        </MudMenu>                
     </MudAppBar>
 
      <!-- Drawer / Left side menu-->
     <MudDrawer Variant="DrawerVariant.Temporary" @bind-Open="@_drawerOpen">
         <MudDrawerHeader>Menu</MudDrawerHeader>
-        <MudButton Variant="Variant.Text" Color="Color.Primary">Home</MudButton>
+        <MudButton Variant="Variant.Text" Color="Color.Primary" Href="/" OnClick="ToggleDrawer">Home</MudButton>
         <MudButton Variant="Variant.Text" Color="Color.Primary">Golf products</MudButton> 
     </MudDrawer>
 
