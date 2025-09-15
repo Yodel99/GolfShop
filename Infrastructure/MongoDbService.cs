@@ -1,5 +1,5 @@
 ﻿using MongoDB.Driver;
-using Domain;
+using Domain.Models;
 
 namespace Infrastructure
 {
