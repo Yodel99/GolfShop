@@ -16,8 +16,9 @@ namespace Infrastructure.Seeding
         {
             User user1 = new User("Admin", "123");
             User user2 = new User("User", "321");
+
+            context.AddAsync(user1);
             
-            context.Users.InsertOneAsync(user1);
         }
        
     }

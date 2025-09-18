@@ -21,8 +21,11 @@ namespace Infrastructure
         public MongoDbContext()
         {
         }
-        public MongoDbContext(DbContextOptions options): base(options)
+        public MongoDbContext(string databaseName, MongoClient client)
         {
+            var database = client.GetDatabase(databaseName);
+            Users = database.GetCollection<User>("users");
+            Products = database.GetCollection<Product>("GolfItems");
         }
        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -53,6 +56,7 @@ namespace Infrastructure
         public async Task AddAsync(User user)
         {
             await Users.InsertOneAsync(user);
+            
         }
     }
 }

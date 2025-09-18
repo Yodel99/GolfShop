@@ -16,11 +16,40 @@ if (dbSettings is null)
 var mongoClient = new MongoClient(dbSettings.ConnectionString);
 
 var dbContextOption = new DbContextOptionsBuilder<MongoDbContext>()
-    .UseMongoDB(mongoClient, dbSettings.DatabaseName).Options;
+    .UseMongoDB(mongoClient, dbSettings.DatabaseName);
 
-var db = new MongoDbContext(dbContextOption);
+var db = new MongoDbContext(dbSettings.DatabaseName, mongoClient);
 
-Seed.Populate(db);
+
+try
+{
+    Console.WriteLine($"ConnectionString: {dbSettings.ConnectionString}");
+    Console.WriteLine($"DatabaseName: {dbSettings.DatabaseName}");
+
+    if (db.Users == null)
+    {
+        Console.WriteLine("Users collection is null.");
+    }
+    else
+    {
+        Console.WriteLine("Users collection is initialized.");
+    }
+
+    Seed.Populate(db);
+    Console.WriteLine("Seeding completed successfully.");
+}
+catch (Exception ex)
+{
+    Console.WriteLine($"Exception during seeding: {ex.Message}");
+    Console.WriteLine($"StackTrace: {ex.StackTrace}");
+}
+
+
+
+
+
+
+
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
